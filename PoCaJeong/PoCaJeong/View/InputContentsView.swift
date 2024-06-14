@@ -7,13 +7,16 @@
 
 import SwiftUI
 import PhotosUI
+import Network
 
 struct InputContentsView: View {
     // 카페 이름
     @State private var cafeName: String = ""
     
     // 와이파이 속도
-    @State private var wifiSpeed: Double = 11.16
+    @State private var wifiSpeed: Double = 0
+    @ObservedObject var viewModel = NetworkSpeedTest()
+    @State private var isLoading: Bool = false
     
     // 1명당 콘센트 개수
     @State private var concent: Int = 0
@@ -24,13 +27,18 @@ struct InputContentsView: View {
     @State private var showNunchiPicker: Bool = false
     
     // 노래 스타일
-    @State private var musicStyle: SongStyleType?
+    @State private var musicStyle: SongStyleType = .none
     
     // 사진 추가
-    @State private var pickedPhoto: PhotosPickerItem?
+    @State private var pickedPhoto: PhotosPickerItem? = nil
+    @State private var image: Image? = nil
+    
+    // 테마 선택
+    @State private var showThemeColor: Bool = false
     
     // 메모
     @State private var memoText: String = ""
+    @State private var isEditing: Bool = false
     private let memoPlaceHolder: String = "추천 메뉴, 카페 분위기 ..."
     
     @Binding var isPresented: Bool
@@ -49,8 +57,17 @@ struct InputContentsView: View {
                             
                             Spacer()
                             
-                            Text("\(String(format: "%.2f", wifiSpeed)) Mbps")
-                                .foregroundStyle(.secondary)
+                            if isLoading {
+                                ProgressView("is Loading ...")
+                                    .progressViewStyle(CircularProgressViewStyle())
+                            } else {
+                                if let downloadSpeed = viewModel.downloadSpeed {
+                                    Text(String(format: "%.2f Mbps", downloadSpeed))
+                                        .foregroundStyle(.secondary)
+                                } else {
+                                    Text("No connection")
+                                }
+                            }
                         }
                     }
                     
@@ -125,58 +142,137 @@ struct InputContentsView: View {
                             Spacer()
                             
                             Picker("", selection: $musicStyle) {
-                                if musicStyle == nil {
-                                    Text("없음")
-                                }
+                                Text(SongStyleType.none.rawValue)
+                                    .tag(SongStyleType.none)
+                                
                                 Divider()
                                 
-                                Section {
-                                    ForEach(SongStyleType.allCases) { music in
-                                        Text(music.rawValue)
-                                    }
+                                ForEach(SongStyleType.allCases.filter { $0 != .none }, id: \.self) { music in
+                                    Text(music.rawValue)
+                                        .tag(music)
                                 }
+                                .pickerStyle(.menu)
                             }
                         }
                     }
                     
                     Section {
-                        Text("Image File Name")
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button("Delete", role: .destructive) {
+                        if let image = image {
+                            PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                                HStack {
+                                    Text("추가된 이미지")
+                                        .foregroundStyle(.black)
                                     
+                                    Spacer()
+                                    
+                                    image
+                                        .resizable()
+                                        .frame(width: 49, height: 38)
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
+                                }
+                                .onChange(of: pickedPhoto) { oldItem, newItem in
+                                    loadImage(from: newItem)
                                 }
                             }
-                        PhotosPicker(selection: $pickedPhoto, matching: .images) {
-                            Text("사진 추가 ...")
-                                .foregroundStyle(.black)
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    clearImage()
+                                } label: {
+                                    Label("삭제", systemImage: "trash")
+                                }
+                            }
+                        } else {
+                            PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                                Text("사진 추가 ...")
+                                    .foregroundStyle(.black)
+                            }
+                            .onChange(of: pickedPhoto) { oldItem, newItem in
+                                loadImage(from: newItem)
+                            }
+                        }
+                    }
+                    
+                    Section {
+                        HStack {
+                            Text("테마 선택")
+                            
+                            Spacer()
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: 22, height: 22)
+                            
+                            Button(action: {
+                                showThemeColor.toggle()
+                            }, label: {
+                                Image(systemName: showThemeColor ? "chevron.up" : "chevron.down")
+                                    .foregroundStyle(.secondary)
+                            })
+                            .buttonStyle(.plain)
+                        }
+                        
+                        if showThemeColor {
+                            Text("")
                         }
                     }
                     
                     Section {
                         TextEditor(text: $memoText)
-                            .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText)
-                            .frame(height: 172)
+                            .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText, isEditing: $isEditing)
+                            .frame(height: 191)
+                            .onTapGesture {
+                                isEditing = true
+                            }
+                            .onSubmit {
+                                isEditing = false
+                            }
                     }
                 }
+                .onReceive(viewModel.$downloadSpeed) { speed in
+                    isLoading = speed == nil // 다운로드 속도가 측정 중인 동안에만 로딩 표시
+                }
+                .onAppear {
+                    viewModel.startMonitoring()
+                }
+                .navigationTitle("카공하기 좋은 카페 추가")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading, content: {
+                        Button(action: {
+                            isPresented.toggle()
+                        }, label: {
+                            Text("취소")
+                        })
+                    })
+                    
+                    ToolbarItem(placement: .topBarTrailing, content: {
+                        Button(action: {
+                            isPresented.toggle()
+                        }, label: {
+                            Text("추가")
+                        })
+                    })
+                }
             }
-            .navigationTitle("InputContentsView")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading, content: {
-                    Button(action: {
-                        isPresented.toggle()
-                    }, label: {
-                        Text("취소")
-                    })
-                })
-                
-                ToolbarItem(placement: .topBarTrailing, content: {
-                    Button(action: {
-                        isPresented.toggle()
-                    }, label: {
-                        Text("추가")
-                    })
-                })
+        }
+    }
+    private func clearImage() {
+        image = nil
+        pickedPhoto = nil
+    }
+    
+    private func loadImage(from item: PhotosPickerItem?) {
+        guard let item = item else {
+            image = nil
+            return
+        }
+        
+        Task {
+            if let data = try? await item.loadTransferable(type: Data.self),
+               let uiImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    image = Image(uiImage: uiImage)
+                }
             }
         }
     }

@@ -10,11 +10,12 @@ import SwiftUI
 struct CustomTextEditorStyle: ViewModifier {
     let placeholder: String
     @Binding var text: String
+    @Binding var isEditing: Bool
     
     func body(content: Content) -> some View {
         content
             .background(alignment: .topLeading) {
-                if text.isEmpty {
+                if text.isEmpty && !isEditing {
                     Text(placeholder)
                         .foregroundStyle(.secondary)
                 }
@@ -23,12 +24,12 @@ struct CustomTextEditorStyle: ViewModifier {
             .autocorrectionDisabled()
             .scrollContentBackground(.hidden)
             .overlay(alignment: .bottomTrailing) {
-                Text("\(text.count) / 126")
+                Text("\(text.count) / 163")
                     .font(.caption2)
                     .foregroundColor(.secondary)
-                    .onChange(of: text) { newValue in
+                    .onChange(of: text) { oldValue, newValue in
                         if newValue.count > 126 {
-                            text = String(newValue.prefix(126))
+                            text = String(newValue.prefix(163))
                         }
                     }
             }
@@ -36,7 +37,7 @@ struct CustomTextEditorStyle: ViewModifier {
 }
 
 extension TextEditor {
-    func customStyleEditor(placeholder: String, userInput: Binding<String>) -> some View {
-        self.modifier(CustomTextEditorStyle(placeholder: placeholder, text: userInput))
+    func customStyleEditor(placeholder: String, userInput: Binding<String>, isEditing: Binding<Bool>) -> some View {
+        self.modifier(CustomTextEditorStyle(placeholder: placeholder, text: userInput, isEditing: isEditing))
     }
 }

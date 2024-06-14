@@ -18,6 +18,7 @@
 		08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6D52C1CBBC6000593D5 /* Color+.swift */; };
 		B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */; };
 		B980426D2C1CD64100317804 /* CustomTextEditorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980426C2C1CD64100317804 /* CustomTextEditorStyle.swift */; };
+		B980426F2C1CDBBF00317804 /* WifiSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980426E2C1CDBBF00317804 /* WifiSpeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		08DBE6D52C1CBBC6000593D5 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentsView.swift; sourceTree = "<group>"; };
 		B980426C2C1CD64100317804 /* CustomTextEditorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditorStyle.swift; sourceTree = "<group>"; };
+		B980426E2C1CDBBF00317804 /* WifiSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiSpeed.swift; sourceTree = "<group>"; };
+		B98042702C1CDEBB00317804 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +68,7 @@
 		08DBE6B52C1C9235000593D5 /* PoCaJeong */ = {
 			isa = PBXGroup;
 			children = (
+				B98042702C1CDEBB00317804 /* Info.plist */,
 				B980426A2C1CC69500317804 /* New Group */,
 				08DBE6D72C1CBEF7000593D5 /* Application */,
 				08DBE6D32C1CBBAD000593D5 /* Helper */,
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				08DBE6CB2C1CB347000593D5 /* Cafe.swift */,
+				B980426E2C1CDBBF00317804 /* WifiSpeed.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */,
 				08DBE6B72C1C9235000593D5 /* PoCaJeongApp.swift in Sources */,
 				08DBE6CE2C1CB581000593D5 /* MockCafeData.swift in Sources */,
+				B980426F2C1CDBBF00317804 /* WifiSpeed.swift in Sources */,
 				B980426D2C1CD64100317804 /* CustomTextEditorStyle.swift in Sources */,
 				08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */,
 				08DBE6CC2C1CB347000593D5 /* Cafe.swift in Sources */,
@@ -364,9 +370,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PoCaJeong/Preview Content\"";
-				DEVELOPMENT_TEAM = 2Q4V2LFG28;
+				DEVELOPMENT_TEAM = 9SVDHQS4M3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PoCaJeong/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -397,9 +404,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PoCaJeong/Preview Content\"";
-				DEVELOPMENT_TEAM = 2Q4V2LFG28;
+				DEVELOPMENT_TEAM = 9SVDHQS4M3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PoCaJeong/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
