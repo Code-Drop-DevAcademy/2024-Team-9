@@ -17,6 +17,7 @@
 		08DBE6CE2C1CB581000593D5 /* MockCafeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6CD2C1CB581000593D5 /* MockCafeData.swift */; };
 		08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */; };
 		08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6D52C1CBBC6000593D5 /* Color+.swift */; };
+		B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		08DBE6CD2C1CB581000593D5 /* MockCafeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCafeData.swift; sourceTree = "<group>"; };
 		08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailView.swift; sourceTree = "<group>"; };
 		08DBE6D52C1CBBC6000593D5 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
+		B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		08DBE6CF2C1CB637000593D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */,
 				08DBE6C42C1C98D7000593D5 /* LivePhotoView.swift */,
 				08DBE6C82C1CB31C000593D5 /* CafeListView.swift */,
 				08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */,
@@ -211,6 +214,7 @@
 				08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */,
 				08DBE6CC2C1CB347000593D5 /* Cafe.swift in Sources */,
 				08DBE6C92C1CB31C000593D5 /* CafeListView.swift in Sources */,
+				B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
