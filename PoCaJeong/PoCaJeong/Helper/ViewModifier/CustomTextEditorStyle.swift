@@ -23,12 +23,12 @@ struct CustomTextEditorStyle: ViewModifier {
             .autocorrectionDisabled()
             .scrollContentBackground(.hidden)
             .overlay(alignment: .bottomTrailing) {
-                Text("\(text.count) / 126")
+                Text("\(text.count) / 163")
                     .font(.caption2)
                     .foregroundColor(.secondary)
-                    .onChange(of: text) { newValue in
+                    .onChange(of: text) { oldValue, newValue in
                         if newValue.count > 126 {
-                            text = String(newValue.prefix(126))
+                            text = String(newValue.prefix(163))
                         }
                     }
             }

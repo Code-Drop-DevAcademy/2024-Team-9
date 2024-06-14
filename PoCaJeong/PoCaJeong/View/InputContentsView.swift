@@ -28,7 +28,8 @@ struct InputContentsView: View {
     @State private var musicStyle: SongStyleType = .none
     
     // 사진 추가
-    @State private var pickedPhoto: PhotosPickerItem?
+    @State private var pickedPhoto: PhotosPickerItem? = nil
+    @State private var image: Image? = nil
     
     // 메모
     @State private var memoText: String = ""
@@ -141,22 +142,45 @@ struct InputContentsView: View {
                     }
                     
                     Section {
-                        Text("Image File Name")
-                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                Button("Delete", role: .destructive) {
+                        if let image = image {
+                            PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                                HStack {
+                                    image
+                                        .resizable()
+                                        .frame(width: 49, height: 38)
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(RoundedRectangle(cornerRadius: 6))
                                     
+                                    Text("추가된 이미지")
+                                        .foregroundStyle(.black)
+                                }
+                                .onChange(of: pickedPhoto) { oldItem, newItem in
+                                    loadImage(from: newItem)
                                 }
                             }
-                        PhotosPicker(selection: $pickedPhoto, matching: .images) {
-                            Text("사진 추가 ...")
-                                .foregroundStyle(.black)
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    clearImage()
+                                } label: {
+                                    Label("삭제", systemImage: "trash")
+                                }
+                            }
+                        } else {
+                            PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                                Text("사진 추가 ...")
+                                    .foregroundStyle(.black)
+                            }
+                            .onChange(of: pickedPhoto) { oldItem, newItem in
+                                loadImage(from: newItem)
+                            }
                         }
+                        
                     }
                     
                     Section {
                         TextEditor(text: $memoText)
                             .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText)
-                            .frame(height: 172)
+                            .frame(height: 191)
                     }
                 }
                 .onAppear {
@@ -184,5 +208,25 @@ struct InputContentsView: View {
             }
         }
     }
+    
+    private func clearImage() {
+        image = nil
+        pickedPhoto = nil
+    }
+    
+    private func loadImage(from item: PhotosPickerItem?) {
+        guard let item = item else {
+            image = nil
+            return
+        }
+        
+        Task {
+            if let data = try? await item.loadTransferable(type: Data.self),
+               let uiImage = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    image = Image(uiImage: uiImage)
+                }
+            }
+        }
+    }
 }
-
