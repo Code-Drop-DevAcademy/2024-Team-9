@@ -33,6 +33,8 @@ struct InputContentsView: View {
     @State private var memoText: String = ""
     private let memoPlaceHolder: String = "추천 메뉴, 카페 분위기 ..."
     
+    @Binding var isPresented: Bool
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -162,7 +164,7 @@ struct InputContentsView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading, content: {
                     Button(action: {
-                        
+                        isPresented.toggle()
                     }, label: {
                         Text("취소")
                     })
@@ -170,7 +172,7 @@ struct InputContentsView: View {
                 
                 ToolbarItem(placement: .topBarTrailing, content: {
                     Button(action: {
-                        
+                        isPresented.toggle()
                     }, label: {
                         Text("추가")
                     })
@@ -180,6 +182,3 @@ struct InputContentsView: View {
     }
 }
 
-#Preview {
-    InputContentsView()
-}
