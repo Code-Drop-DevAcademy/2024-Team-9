@@ -27,12 +27,14 @@ final class Cafe: Identifiable {
     }
 }
 
-enum SongStyleType {
-    case classic
-    case hiphop
-    case indie
-    case dance
-    case RnB
-    case balad
-    case popSong
+enum SongStyleType: String, Identifiable, CaseIterable{
+    case classic = "클래식"
+    case hiphop = "힙합"
+    case indie = "인디"
+    case dance = "댄스"
+    case RnB = "R&B"
+    case balad = "발라드"
+    case popSong = "팝송"
+    
+    var id: Self { self }
 }

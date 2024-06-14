@@ -11,34 +11,41 @@ struct CafeListView: View {
     @State var cafes = MockCafeData.cafes
     @State var isInputContentsViewShown = false
     var body: some View {
-        ZStack {
-            Color(hex: "F2F2F7")
-                .ignoresSafeArea()
-            VStack {
-                List(cafes) { cafe in
-                    NavigationLink {
-                        CafeDetailView(cafe: cafe)
-                    } label: {
-                        Text(cafe.name)
+        NavigationStack {
+            ZStack {
+                Color(hex: "F2F2F7")
+                    .ignoresSafeArea()
+                VStack {
+                    List(cafes) { cafe in
+                        NavigationLink {
+                            CafeDetailView(cafe: cafe)
+                        } label: {
+                            Text(cafe.name)
+                        }
                     }
+                    Spacer()
                 }
-                Spacer()
+                .padding(.top, 18)
             }
-            .padding(.top, 18)
-        }
-        .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(action: {
-                    isInputContentsViewShown = true
-                }, label: {
-                    
-                })
-                Image(systemName: "plus")
-                    .foregroundStyle(.blue)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        isInputContentsViewShown = true
+                    }, label: {
+                        Image(systemName: "plus")
+                    })
+                }
+            }
+            .navigationTitle("CafeListView")
+            .toolbarBackground(.white, for: .navigationBar)
+            .toolbarBackground(.visible, for: .navigationBar)
+            .sheet(isPresented: $isInputContentsViewShown) {
+                InputContentsView(isPresented: $isInputContentsViewShown)
             }
         }
-        .navigationTitle("CafeListView")
-        .toolbarBackground(.white, for: .navigationBar)
-        .toolbarBackground(.visible, for: .navigationBar)
     }
+}
+
+#Preview {
+    CafeListView()
 }
