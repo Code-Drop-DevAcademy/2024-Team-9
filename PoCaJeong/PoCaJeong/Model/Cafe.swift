@@ -28,6 +28,7 @@ final class Cafe: Identifiable {
 }
 
 enum SongStyleType: String, Identifiable, CaseIterable{
+    case none = "없음"
     case classic = "클래식"
     case hiphop = "힙합"
     case indie = "인디"

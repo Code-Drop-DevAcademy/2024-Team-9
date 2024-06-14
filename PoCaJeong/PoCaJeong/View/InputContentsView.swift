@@ -14,6 +14,7 @@ struct InputContentsView: View {
     
     // 와이파이 속도
     @State private var wifiSpeed: Double = 11.16
+    @StateObject var viewModel = NetworkSpeedViewModel()
     
     // 1명당 콘센트 개수
     @State private var concent: Int = 0
@@ -24,7 +25,7 @@ struct InputContentsView: View {
     @State private var showNunchiPicker: Bool = false
     
     // 노래 스타일
-    @State private var musicStyle: SongStyleType?
+    @State private var musicStyle: SongStyleType = .none
     
     // 사진 추가
     @State private var pickedPhoto: PhotosPickerItem?
@@ -49,7 +50,7 @@ struct InputContentsView: View {
                             
                             Spacer()
                             
-                            Text("\(String(format: "%.2f", wifiSpeed)) Mbps")
+                            Text("\(String(format: "%.2f", viewModel.networkSpeedTest.downloadSpeed)) Mbps")
                                 .foregroundStyle(.secondary)
                         }
                     }
@@ -125,16 +126,16 @@ struct InputContentsView: View {
                             Spacer()
                             
                             Picker("", selection: $musicStyle) {
-                                if musicStyle == nil {
-                                    Text("없음")
-                                }
+                                Text(SongStyleType.none.rawValue)
+                                    .tag(SongStyleType.none)
+                                
                                 Divider()
                                 
-                                Section {
-                                    ForEach(SongStyleType.allCases) { music in
-                                        Text(music.rawValue)
-                                    }
+                                ForEach(SongStyleType.allCases.filter { $0 != .none }, id: \.self) { music in
+                                    Text(music.rawValue)
+                                        .tag(music)
                                 }
+                                .pickerStyle(.menu)
                             }
                         }
                     }
@@ -158,25 +159,28 @@ struct InputContentsView: View {
                             .frame(height: 172)
                     }
                 }
-            }
-            .navigationTitle("InputContentsView")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading, content: {
-                    Button(action: {
-                        isPresented.toggle()
-                    }, label: {
-                        Text("취소")
+                .onAppear {
+                    viewModel.startTest()
+                }
+                .navigationTitle("InputContentsView")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading, content: {
+                        Button(action: {
+                            isPresented.toggle()
+                        }, label: {
+                            Text("취소")
+                        })
                     })
-                })
-                
-                ToolbarItem(placement: .topBarTrailing, content: {
-                    Button(action: {
-                        isPresented.toggle()
-                    }, label: {
-                        Text("추가")
+                    
+                    ToolbarItem(placement: .topBarTrailing, content: {
+                        Button(action: {
+                            isPresented.toggle()
+                        }, label: {
+                            Text("추가")
+                        })
                     })
-                })
+                }
             }
         }
     }
