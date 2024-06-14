@@ -11,6 +11,12 @@
 		08DBE6B92C1C9235000593D5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6B82C1C9235000593D5 /* ContentView.swift */; };
 		08DBE6BB2C1C9237000593D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DBE6BA2C1C9237000593D5 /* Assets.xcassets */; };
 		08DBE6BE2C1C9237000593D5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DBE6BD2C1C9237000593D5 /* Preview Assets.xcassets */; };
+		08DBE6C52C1C98D7000593D5 /* LivePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6C42C1C98D7000593D5 /* LivePhotoView.swift */; };
+		08DBE6C92C1CB31C000593D5 /* CafeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6C82C1CB31C000593D5 /* CafeListView.swift */; };
+		08DBE6CC2C1CB347000593D5 /* Cafe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6CB2C1CB347000593D5 /* Cafe.swift */; };
+		08DBE6CE2C1CB581000593D5 /* MockCafeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6CD2C1CB581000593D5 /* MockCafeData.swift */; };
+		08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */; };
+		08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DBE6D52C1CBBC6000593D5 /* Color+.swift */; };
 		B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -20,6 +26,12 @@
 		08DBE6B82C1C9235000593D5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		08DBE6BA2C1C9237000593D5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08DBE6BD2C1C9237000593D5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		08DBE6C42C1C98D7000593D5 /* LivePhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoView.swift; sourceTree = "<group>"; };
+		08DBE6C82C1CB31C000593D5 /* CafeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeListView.swift; sourceTree = "<group>"; };
+		08DBE6CB2C1CB347000593D5 /* Cafe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cafe.swift; sourceTree = "<group>"; };
+		08DBE6CD2C1CB581000593D5 /* MockCafeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCafeData.swift; sourceTree = "<group>"; };
+		08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailView.swift; sourceTree = "<group>"; };
+		08DBE6D52C1CBBC6000593D5 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -53,7 +65,11 @@
 		08DBE6B52C1C9235000593D5 /* PoCaJeong */ = {
 			isa = PBXGroup;
 			children = (
-				08DBE6B62C1C9235000593D5 /* PoCaJeongApp.swift */,
+				08DBE6D72C1CBEF7000593D5 /* Application */,
+				08DBE6D32C1CBBAD000593D5 /* Helper */,
+				08DBE6D02C1CB645000593D5 /* Mock */,
+				08DBE6CF2C1CB637000593D5 /* View */,
+				08DBE6CA2C1CB338000593D5 /* Model */,
 				08DBE6B82C1C9235000593D5 /* ContentView.swift */,
 				08DBE6BA2C1C9237000593D5 /* Assets.xcassets */,
 				08DBE6BC2C1C9237000593D5 /* Preview Content */,
@@ -68,6 +84,56 @@
 				08DBE6BD2C1C9237000593D5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		08DBE6CA2C1CB338000593D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6CB2C1CB347000593D5 /* Cafe.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		08DBE6CF2C1CB637000593D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6C42C1C98D7000593D5 /* LivePhotoView.swift */,
+				08DBE6C82C1CB31C000593D5 /* CafeListView.swift */,
+				08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		08DBE6D02C1CB645000593D5 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6CD2C1CB581000593D5 /* MockCafeData.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		08DBE6D32C1CBBAD000593D5 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6D42C1CBBB5000593D5 /* Extensions */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		08DBE6D42C1CBBB5000593D5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6D52C1CBBC6000593D5 /* Color+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		08DBE6D72C1CBEF7000593D5 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				08DBE6B62C1C9235000593D5 /* PoCaJeongApp.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,7 +207,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				08DBE6B92C1C9235000593D5 /* ContentView.swift in Sources */,
+				08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */,
 				08DBE6B72C1C9235000593D5 /* PoCaJeongApp.swift in Sources */,
+				08DBE6CE2C1CB581000593D5 /* MockCafeData.swift in Sources */,
+				08DBE6C52C1C98D7000593D5 /* LivePhotoView.swift in Sources */,
+				08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */,
+				08DBE6CC2C1CB347000593D5 /* Cafe.swift in Sources */,
+				08DBE6C92C1CB31C000593D5 /* CafeListView.swift in Sources */,
 				B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,9 +363,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xerath.PoCaJeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -320,9 +396,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.xerath.PoCaJeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
