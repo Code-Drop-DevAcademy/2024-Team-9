@@ -28,7 +28,11 @@ struct InputContentsView: View {
     
     // 사진 추가
     @State private var pickedPhoto: PhotosPickerItem?
-
+    
+    // 메모
+    @State private var memoText: String = ""
+    private let memoPlaceHolder: String = "추천 메뉴, 카페 분위기 ..."
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -43,9 +47,9 @@ struct InputContentsView: View {
                             
                             Spacer()
                             
-                                Text("\(String(format: "%.2f", wifiSpeed)) Mbps")
-                                    .foregroundStyle(.secondary)
-                            }
+                            Text("\(String(format: "%.2f", wifiSpeed)) Mbps")
+                                .foregroundStyle(.secondary)
+                        }
                     }
                     
                     let isTenConcent: Bool = concent == 10
@@ -134,14 +138,12 @@ struct InputContentsView: View {
                     }
                     
                     Section {
-                        if let pickedPhoto = pickedPhoto {
-                            Text("Image File Name")
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    Button("Delete", role: .destructive) {
-                                        
-                                    }
+                        Text("Image File Name")
+                            .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                Button("Delete", role: .destructive) {
+                                    
                                 }
-                        }
+                            }
                         PhotosPicker(selection: $pickedPhoto, matching: .images) {
                             Text("사진 추가 ...")
                                 .foregroundStyle(.black)
@@ -149,7 +151,8 @@ struct InputContentsView: View {
                     }
                     
                     Section {
-                        TextEditor(text: .constant("Placeholder"))
+                        TextEditor(text: $memoText)
+                            .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText)
                             .frame(height: 172)
                     }
                 }
