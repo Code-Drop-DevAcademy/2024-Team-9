@@ -33,6 +33,9 @@ struct InputContentsView: View {
     @State private var pickedPhoto: PhotosPickerItem? = nil
     @State private var image: Image? = nil
     
+    // 테마 선택
+    @State private var showThemeColor: Bool = false
+    
     // 메모
     @State private var memoText: String = ""
     @State private var isEditing: Bool = false
@@ -191,6 +194,29 @@ struct InputContentsView: View {
                     }
                     
                     Section {
+                        HStack {
+                            Text("테마 선택")
+                            
+                            Spacer()
+                            
+                            RoundedRectangle(cornerRadius: 10)
+                                .frame(width: 22, height: 22)
+                            
+                            Button(action: {
+                                showThemeColor.toggle()
+                            }, label: {
+                                Image(systemName: showThemeColor ? "chevron.up" : "chevron.down")
+                                    .foregroundStyle(.secondary)
+                            })
+                            .buttonStyle(.plain)
+                        }
+                        
+                        if showThemeColor {
+                            Text("")
+                        }
+                    }
+                    
+                    Section {
                         TextEditor(text: $memoText)
                             .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText, isEditing: $isEditing)
                             .frame(height: 191)
@@ -208,7 +234,7 @@ struct InputContentsView: View {
                 .onAppear {
                     viewModel.startMonitoring()
                 }
-                .navigationTitle("InputContentsView")
+                .navigationTitle("카공하기 좋은 카페 추가")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarLeading, content: {
