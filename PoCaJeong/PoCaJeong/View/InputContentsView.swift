@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct InputContentsView: View {
     // 카페 이름
@@ -25,9 +26,9 @@ struct InputContentsView: View {
     // 노래 스타일
     @State private var musicStyle: SongStyleType?
     
-    let sample: [String] = ["00", "01", "02"]
-    
-    
+    // 사진 추가
+    @State private var pickedPhoto: PhotosPickerItem?
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -42,9 +43,9 @@ struct InputContentsView: View {
                             
                             Spacer()
                             
-                            Text("\(wifiSpeed) Mbps")
-                                .foregroundStyle(.secondary)
-                        }
+                                Text("\(String(format: "%.2f", wifiSpeed)) Mbps")
+                                    .foregroundStyle(.secondary)
+                            }
                     }
                     
                     let isTenConcent: Bool = concent == 10
@@ -55,7 +56,9 @@ struct InputContentsView: View {
                             Text("콘센트")
                             Spacer()
                             Button(action: {
-                                showConcentPicker.toggle()
+                                withAnimation {
+                                    showConcentPicker.toggle()
+                                }
                             }, label: {
                                 Text(isTenConcent ? "1명당 콘센트 \(concent)개" : "1명당 콘센트 0\(concent)개")
                                     .foregroundStyle(showConcentPicker ? .pink : .black)
@@ -84,7 +87,9 @@ struct InputContentsView: View {
                             Text("눈치")
                             Spacer()
                             Button(action: {
-                                showNunchiPicker.toggle()
+                                withAnimation {
+                                    showNunchiPicker.toggle()
+                                }
                             }, label: {
                                 Text(isTenNunchi ? "사장님과 눈 마주친 횟수 \(nunchi)번" : "사장님과 눈 마주친 횟수 0\(nunchi)번")
                                     .foregroundStyle(showNunchiPicker ? .pink : .black)
@@ -129,7 +134,18 @@ struct InputContentsView: View {
                     }
                     
                     Section {
-                        Text("사진 추가 ...")
+                        if let pickedPhoto = pickedPhoto {
+                            Text("Image File Name")
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button("Delete", role: .destructive) {
+                                        
+                                    }
+                                }
+                        }
+                        PhotosPicker(selection: $pickedPhoto, matching: .images) {
+                            Text("사진 추가 ...")
+                                .foregroundStyle(.black)
+                        }
                     }
                     
                     Section {
