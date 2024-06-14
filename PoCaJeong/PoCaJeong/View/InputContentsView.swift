@@ -7,14 +7,16 @@
 
 import SwiftUI
 import PhotosUI
+import Network
 
 struct InputContentsView: View {
     // 카페 이름
     @State private var cafeName: String = ""
     
     // 와이파이 속도
-    @State private var wifiSpeed: Double = 11.16
-    @StateObject var viewModel = NetworkSpeedViewModel()
+    @State private var wifiSpeed: Double = 0
+    @ObservedObject var viewModel = NetworkSpeedTest()
+    @State private var isLoading: Bool = false
     
     // 1명당 콘센트 개수
     @State private var concent: Int = 0
@@ -33,6 +35,7 @@ struct InputContentsView: View {
     
     // 메모
     @State private var memoText: String = ""
+    @State private var isEditing: Bool = false
     private let memoPlaceHolder: String = "추천 메뉴, 카페 분위기 ..."
     
     @Binding var isPresented: Bool
@@ -51,8 +54,17 @@ struct InputContentsView: View {
                             
                             Spacer()
                             
-                            Text("\(String(format: "%.2f", viewModel.networkSpeedTest.downloadSpeed)) Mbps")
-                                .foregroundStyle(.secondary)
+                            if isLoading {
+                                ProgressView("is Loading ...")
+                                    .progressViewStyle(CircularProgressViewStyle())
+                            } else {
+                                if let downloadSpeed = viewModel.downloadSpeed {
+                                    Text(String(format: "%.2f Mbps", downloadSpeed))
+                                        .foregroundStyle(.secondary)
+                                } else {
+                                    Text("No connection")
+                                }
+                            }
                         }
                     }
                     
@@ -145,14 +157,16 @@ struct InputContentsView: View {
                         if let image = image {
                             PhotosPicker(selection: $pickedPhoto, matching: .images) {
                                 HStack {
+                                    Text("추가된 이미지")
+                                        .foregroundStyle(.black)
+                                    
+                                    Spacer()
+                                    
                                     image
                                         .resizable()
                                         .frame(width: 49, height: 38)
                                         .aspectRatio(contentMode: .fit)
                                         .clipShape(RoundedRectangle(cornerRadius: 6))
-                                    
-                                    Text("추가된 이미지")
-                                        .foregroundStyle(.black)
                                 }
                                 .onChange(of: pickedPhoto) { oldItem, newItem in
                                     loadImage(from: newItem)
@@ -174,17 +188,25 @@ struct InputContentsView: View {
                                 loadImage(from: newItem)
                             }
                         }
-                        
                     }
                     
                     Section {
                         TextEditor(text: $memoText)
-                            .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText)
+                            .customStyleEditor(placeholder: memoPlaceHolder, userInput: $memoText, isEditing: $isEditing)
                             .frame(height: 191)
+                            .onTapGesture {
+                                isEditing = true
+                            }
+                            .onSubmit {
+                                isEditing = false
+                            }
                     }
                 }
+                .onReceive(viewModel.$downloadSpeed) { speed in
+                    isLoading = speed == nil // 다운로드 속도가 측정 중인 동안에만 로딩 표시
+                }
                 .onAppear {
-                    viewModel.startTest()
+                    viewModel.startMonitoring()
                 }
                 .navigationTitle("InputContentsView")
                 .navigationBarTitleDisplayMode(.inline)
@@ -208,7 +230,6 @@ struct InputContentsView: View {
             }
         }
     }
-    
     private func clearImage() {
         image = nil
         pickedPhoto = nil
@@ -230,3 +251,4 @@ struct InputContentsView: View {
         }
     }
 }
+
