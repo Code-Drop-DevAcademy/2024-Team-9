@@ -13,19 +13,39 @@ struct CafeListView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color(hex: "F2F2F7")
+                Color(.primaryPink)
                     .ignoresSafeArea()
-                VStack {
+                
+                VStack(alignment: .leading) {
+                    RoundedRectangle(cornerRadius: 28)
+                        .frame(width: 276, height: 60)
+                        .padding(.leading, 16)
+                        .foregroundStyle(.primaryBlue)
+                        .overlay {
+                            Text("카공하기 좋은 카페")
+                                .font(.pretendardBlack32)
+                                .kerning(-1)
+                                .foregroundStyle(.white)
+                        }
+                    
                     List(cafes) { cafe in
                         NavigationLink {
                             CafeDetailView(cafe: cafe)
                         } label: {
                             Text(cafe.name)
                         }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                
+                            } label: {
+                                Label("삭제", systemImage: "trash")
+                            }
+                        }
                     }
+                    .scrollContentBackground(.hidden)
+                    
                     Spacer()
                 }
-                .padding(.top, 18)
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -36,9 +56,6 @@ struct CafeListView: View {
                     })
                 }
             }
-            .navigationTitle("CafeListView")
-            .toolbarBackground(.white, for: .navigationBar)
-            .toolbarBackground(.visible, for: .navigationBar)
             .sheet(isPresented: $isInputContentsViewShown) {
                 InputContentsView(isPresented: $isInputContentsViewShown)
             }
