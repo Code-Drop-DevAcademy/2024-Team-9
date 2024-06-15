@@ -34,6 +34,7 @@ struct InputContentsView: View {
     @State private var image: Image? = nil
     
     // 테마 선택
+    @State private var selectedTheme: String?
     @State private var showThemeColor: Bool = false
     
     // 메모
@@ -194,25 +195,42 @@ struct InputContentsView: View {
                     }
                     
                     Section {
-                        HStack {
-                            Text("테마 선택")
+                        VStack {
+                            HStack {
+                                Text("테마 선택")
+                                
+                                Spacer()
+                                
+                                if let theme = selectedTheme {
+                                    Image(theme)
+                                        .resizable()
+                                        .frame(width: 22, height: 22)
+                                }
+                                
+                                Button(action: {
+                                    showThemeColor.toggle()
+                                }, label: {
+                                    Image(systemName: showThemeColor ? "chevron.up" : "chevron.down")
+                                        .foregroundStyle(.secondary)
+                                })
+                                .buttonStyle(.plain)
+                            }
                             
-                            Spacer()
-                            
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 22, height: 22)
-                            
-                            Button(action: {
-                                showThemeColor.toggle()
-                            }, label: {
-                                Image(systemName: showThemeColor ? "chevron.up" : "chevron.down")
-                                    .foregroundStyle(.secondary)
-                            })
-                            .buttonStyle(.plain)
-                        }
-                        
-                        if showThemeColor {
-                            Text("")
+                            if showThemeColor {
+                                ScrollView(.horizontal) {
+                                    HStack(spacing: 12) {
+                                        ForEach(0..<8) { index in
+                                            Image("theme\(index + 1)")
+                                                .resizable()
+                                                .frame(width: 44, height: 44)
+                                                .onTapGesture {
+                                                    selectedTheme = "theme\(index + 1)"
+                                                }
+                                        }
+                                    }
+                                }
+                                .scrollIndicators(.hidden)
+                            }
                         }
                     }
                     
