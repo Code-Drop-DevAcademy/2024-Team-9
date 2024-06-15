@@ -84,7 +84,7 @@ struct InputContentsView: View {
                                 }
                             }, label: {
                                 Text(isTenConcent ? "1명당 콘센트 \(concent)개" : "1명당 콘센트 0\(concent)개")
-                                    .foregroundStyle(showConcentPicker ? .pink : .black)
+                                    .foregroundStyle(showConcentPicker ? .blue : .black)
                                 
                             })
                             .buttonStyle(.bordered)
@@ -115,7 +115,7 @@ struct InputContentsView: View {
                                 }
                             }, label: {
                                 Text(isTenNunchi ? "사장님과 눈 마주친 횟수 \(nunchi)번" : "사장님과 눈 마주친 횟수 0\(nunchi)번")
-                                    .foregroundStyle(showNunchiPicker ? .pink : .black)
+                                    .foregroundStyle(showNunchiPicker ? .blue : .black)
                             })
                             .buttonStyle(.bordered)
                         }

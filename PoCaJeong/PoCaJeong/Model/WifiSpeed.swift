@@ -35,7 +35,7 @@ class NetworkSpeedTest: ObservableObject {
     }
     
     private func testDownloadSpeed() {
-        let url = URL(string: "http://ipv4.download.thinkbroadband.com/1MB.zip")!
+        let url = URL(string: "http://ipv4.download.thinkbroadband.com/100MB.zip")!
         let startTime = Date()
         
         URLSession.shared.dataTask(with: url) { data, response, error in
