@@ -19,6 +19,11 @@
 		B941CE6F2C1CBC4D006289AE /* InputContentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */; };
 		B980426D2C1CD64100317804 /* CustomTextEditorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980426C2C1CD64100317804 /* CustomTextEditorStyle.swift */; };
 		B980426F2C1CDBBF00317804 /* WifiSpeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980426E2C1CDBBF00317804 /* WifiSpeed.swift */; };
+		B98042732C1D142B00317804 /* PreviewSecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B98042722C1D142B00317804 /* PreviewSecondView.swift */; };
+		B98042792C1D163E00317804 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = B98042762C1D163E00317804 /* Pretendard-Regular.otf */; };
+		B980427A2C1D163E00317804 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = B98042772C1D163E00317804 /* Pretendard-Black.otf */; };
+		B980427B2C1D163E00317804 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B98042782C1D163E00317804 /* Pretendard-Bold.otf */; };
+		B980427D2C1D169900317804 /* Font+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B980427C2C1D169900317804 /* Font+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		B980426C2C1CD64100317804 /* CustomTextEditorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextEditorStyle.swift; sourceTree = "<group>"; };
 		B980426E2C1CDBBF00317804 /* WifiSpeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WifiSpeed.swift; sourceTree = "<group>"; };
 		B98042702C1CDEBB00317804 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		B98042722C1D142B00317804 /* PreviewSecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewSecondView.swift; sourceTree = "<group>"; };
+		B98042762C1D163E00317804 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		B98042772C1D163E00317804 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		B98042782C1D163E00317804 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		B980427C2C1D169900317804 /* Font+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,8 +78,8 @@
 		08DBE6B52C1C9235000593D5 /* PoCaJeong */ = {
 			isa = PBXGroup;
 			children = (
+				B98042742C1D15F800317804 /* Resources */,
 				B98042702C1CDEBB00317804 /* Info.plist */,
-				B980426A2C1CC69500317804 /* New Group */,
 				08DBE6D72C1CBEF7000593D5 /* Application */,
 				08DBE6D32C1CBBAD000593D5 /* Helper */,
 				08DBE6D02C1CB645000593D5 /* Mock */,
@@ -102,6 +112,7 @@
 		08DBE6CF2C1CB637000593D5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				B98042712C1D141800317804 /* Preview */,
 				B941CE6E2C1CBC4D006289AE /* InputContentsView.swift */,
 				08DBE6C82C1CB31C000593D5 /* CafeListView.swift */,
 				08DBE6D12C1CB6A5000593D5 /* CafeDetailView.swift */,
@@ -130,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				08DBE6D52C1CBBC6000593D5 /* Color+.swift */,
+				B980427C2C1D169900317804 /* Font+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -142,19 +154,38 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		B980426A2C1CC69500317804 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		B980426B2C1CD62B00317804 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
 				B980426C2C1CD64100317804 /* CustomTextEditorStyle.swift */,
 			);
 			path = ViewModifier;
+			sourceTree = "<group>";
+		};
+		B98042712C1D141800317804 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				B98042722C1D142B00317804 /* PreviewSecondView.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		B98042742C1D15F800317804 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B98042752C1D15FE00317804 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B98042752C1D15FE00317804 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				B98042772C1D163E00317804 /* Pretendard-Black.otf */,
+				B98042782C1D163E00317804 /* Pretendard-Bold.otf */,
+				B98042762C1D163E00317804 /* Pretendard-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,6 +247,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				08DBE6BE2C1C9237000593D5 /* Preview Assets.xcassets in Resources */,
+				B980427B2C1D163E00317804 /* Pretendard-Bold.otf in Resources */,
+				B98042792C1D163E00317804 /* Pretendard-Regular.otf in Resources */,
+				B980427A2C1D163E00317804 /* Pretendard-Black.otf in Resources */,
 				08DBE6BB2C1C9237000593D5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,12 +261,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B980427D2C1D169900317804 /* Font+.swift in Sources */,
 				08DBE6B92C1C9235000593D5 /* ContentView.swift in Sources */,
 				08DBE6D62C1CBBC6000593D5 /* Color+.swift in Sources */,
 				08DBE6B72C1C9235000593D5 /* PoCaJeongApp.swift in Sources */,
 				08DBE6CE2C1CB581000593D5 /* MockCafeData.swift in Sources */,
 				B980426F2C1CDBBF00317804 /* WifiSpeed.swift in Sources */,
 				B980426D2C1CD64100317804 /* CustomTextEditorStyle.swift in Sources */,
+				B98042732C1D142B00317804 /* PreviewSecondView.swift in Sources */,
 				08DBE6D22C1CB6A5000593D5 /* CafeDetailView.swift in Sources */,
 				08DBE6CC2C1CB347000593D5 /* Cafe.swift in Sources */,
 				08DBE6C92C1CB31C000593D5 /* CafeListView.swift in Sources */,
